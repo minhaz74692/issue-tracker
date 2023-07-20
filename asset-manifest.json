@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/minhaz74692/issue-tracker/static/css/main.5f2b4e0b.css",
+    "main.js": "/minhaz74692/issue-tracker/static/js/main.beb4dd04.js",
+    "static/js/787.cd5e805f.chunk.js": "/minhaz74692/issue-tracker/static/js/787.cd5e805f.chunk.js",
+    "static/media/fa-solid-900.ttf": "/minhaz74692/issue-tracker/static/media/fa-solid-900.4a2cd718d7031b732e76.ttf",
+    "static/media/fa-brands-400.ttf": "/minhaz74692/issue-tracker/static/media/fa-brands-400.150de8eaa454d669c405.ttf",
+    "static/media/fa-solid-900.woff2": "/minhaz74692/issue-tracker/static/media/fa-solid-900.bb975c966c37455a1bc3.woff2",
+    "static/media/fa-brands-400.woff2": "/minhaz74692/issue-tracker/static/media/fa-brands-400.e033a13ee751afc1860c.woff2",
+    "static/media/fa-regular-400.ttf": "/minhaz74692/issue-tracker/static/media/fa-regular-400.d87474231f4192884802.ttf",
+    "static/media/fa-regular-400.woff2": "/minhaz74692/issue-tracker/static/media/fa-regular-400.3223dc79c1adee56370b.woff2",
+    "static/media/fa-v4compatibility.ttf": "/minhaz74692/issue-tracker/static/media/fa-v4compatibility.0e3a648be390bd8cb094.ttf",
+    "static/media/fa-v4compatibility.woff2": "/minhaz74692/issue-tracker/static/media/fa-v4compatibility.68577e40f3e70067b5da.woff2",
+    "index.html": "/minhaz74692/issue-tracker/index.html",
+    "main.5f2b4e0b.css.map": "/minhaz74692/issue-tracker/static/css/main.5f2b4e0b.css.map",
+    "main.beb4dd04.js.map": "/minhaz74692/issue-tracker/static/js/main.beb4dd04.js.map",
+    "787.cd5e805f.chunk.js.map": "/minhaz74692/issue-tracker/static/js/787.cd5e805f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5f2b4e0b.css",
+    "static/js/main.beb4dd04.js"
+  ]
+}

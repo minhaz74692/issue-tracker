@@ -68,7 +68,7 @@ const App = (props) => {
       // console.log(isAnyDocumentWithTrueStatus);
     });
     querySnapshot.docs.length > 0 && isAnyDocumentWithFalseStatus ===false ? window.alert('you can not add more then one issue with same email with pending status.') :
-      dataToAddorUpdate.email != '' && dataToAddorUpdate.issue != '' ? await issuesRef.add(dataToAddorUpdate)
+      dataToAddorUpdate.email !=='' && dataToAddorUpdate.issue !=='' ? await issuesRef.add(dataToAddorUpdate)
         .then((docRef) => {
           console.log('Issue added: ', docRef.id);
           fieldClear();
@@ -83,11 +83,11 @@ const App = (props) => {
   }
 
   // Edit Issue
-  const handleEditIssue = async (email, newData) => {
+  const handleEditIssue = async (id, newData) => {
     setLoading(true);
     setOperation('...updating');
     try {
-      const querySnapshot = await issuesRef.where('email', '==', email).get();
+      const querySnapshot = await issuesRef.where('id', '==', id).get();
 
       const batch = firestore.batch();
       querySnapshot.forEach((doc) => {
@@ -97,7 +97,7 @@ const App = (props) => {
       await batch.commit();
       fieldClear();
       setIssues(issues.map((issue) => {
-        return issue.email === email ? { ...dataToAddorUpdate } : issue;
+        return issue.id === id ? { ...dataToAddorUpdate } : issue;
       }));
       console.log('Issue updated successfully.');
     } catch (error) {
@@ -108,8 +108,12 @@ const App = (props) => {
   };
 
   // Handle Issue Status
-  const handleStatus = async (id, newData) => {
-    setLoading(true);
+  const handleStatus = async (id,status, newData) => {
+    if(status){
+      console.log('Aleready Done');
+      window.alert('This issue is already solved. If you have another issue than add a new issue');
+    }else{
+      setLoading(true);
     try {
       const querySnapshot = await issuesRef.where('id', '==', id).get();
 
@@ -127,7 +131,9 @@ const App = (props) => {
       console.error('Error updating documents:', error);
     }
     setLoading(false);
+    }
   };
+  
 
   // Delete Issue
   const handleDelete = async (id) => {
@@ -167,7 +173,7 @@ const App = (props) => {
 
   return (
     <div className='container mt-2'>
-      <div className='col-6 ms-auto me-auto'>
+      <div className='col-10 col-lg-6 col-sm-8 col-md-8 ms-auto me-auto'>
         <h2 className='text-center'>Issue Tracker</h2>
         <form>
           <div className="mb-2">
@@ -189,10 +195,10 @@ const App = (props) => {
 
           {/* DropDown issue selection */}
           <div className='mb-2'>
-            <label htmlFor="issue" className=''>Choose a type of issue:</label>
-            <select id="issue" name="issue" className='ms-3 rounded py-2 px-5' required value={issue}
+            <label htmlFor="issue" className=''>Choose:</label>
+            <select id="issue" name="issue" className='ms-3 rounded py-2 px-3' required value={issue}
               onChange={(e) => setIssue(e.target.value)}>
-              <option value="select issue inactive">-Select a Issue-</option>
+              <option value="select issue inactive">-Select an Issue-</option>
               <option value="Slow Speed">Slow Speed</option>
               <option value="Connection Drop">Connection Drop</option>
               <option value="No Connection">No Connection</option>
@@ -203,7 +209,7 @@ const App = (props) => {
         </form>
         <button type="submit" className="btn btn-primary" style={{ 'display': updateStart ? 'none' : 'block' }} onClick={handleAddIssue} >Submit</button>
 
-        <button type="submit" className="btn btn-primary" style={{ 'display': updateStart ? 'block' : 'none' }} onClick={() => handleEditIssue(email, dataToAddorUpdate)} >Update Issue</button>
+        <button type="submit" className="btn btn-primary" style={{ 'display': updateStart ? 'block' : 'none' }} onClick={() => handleEditIssue(id, dataToAddorUpdate)} >Update Issue</button>
 
       </div>
 
@@ -212,7 +218,7 @@ const App = (props) => {
       </div> :<div></div>}
       <div className='mt-5'><h2 className='text-center'>Issue List</h2></div>
 
-      { issues.length > 0 ? <IssueTable issues={issues} handleEdit={handleEditIssue} delete={handleDelete} updateStart={updateStart} updateStatus={handleUpdateStatus} handleStatus={handleStatus} /> : <div className='mt-2 mb-6'><h3 className='text-center'>No issue added yet.</h3></div>}
+      { issues.length > 0 ? <IssueTable issues={issues} delete={handleDelete} updateStart={updateStart} updateStatus={handleUpdateStatus} handleStatus={handleStatus} /> : <div className='mt-2 mb-6'><h3 className='text-center'>No issue added yet.</h3></div>}
       <div id="bottomElement" className='m-5'></div>
 
     </div>
